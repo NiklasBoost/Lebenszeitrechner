@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lebenszeitrechner</title>
+</head>
+<body>
+  <h2>Welcome to see your lifetime!</h2>
+  <label>You only have to enter your date of birth and time:</label>
+    <input type="date" class="birth-date-js">
+    <input type="time" class="birth-time-js">
+    <button class="see-past-time-button-js">see past lifetime</button>
+  <p>ps. this is just for javascript practice. So please don't be offended by the lack of CSS in this project.</p>
+
+  <div>
+    <div>Your past time in milliseconds</div>
+    <div>Your past time in seconds</div>
+    <div>Your past time in minutes</div>
+    <div>Your past time in hours</div>
+    <div>Your past time in days</div>
+    <div>Your past time in weeks</div>
+    <div>Your past time in month</div>
+    <div>Your past time in years</div>
+    <div>Your past time in decades</div>
+  </div>
+
+  <script>
+    // first lets save the input in to variables
+    let userBirthDate;
+    let userBirthTime;
+    let userBirth;
+    
+
+    document.querySelector('.see-past-time-button-js')
+      .addEventListener('click', () => {
+        saveUserInputs();
+        // if () {
+        //   console.log('OMG! YOU WERE BORNED IN THE FUTURE!');
+        // }
+        diffToNowTime();
+      });
+
+
+    function diffToNowTime() {
+      const nowTime = new Date();
+      const year = nowTime.getFullYear();
+      const month = nowTime.getMonth() + 1;
+      const day = nowTime.getDate();
+      const hour = nowTime.getHours();
+      const minute = nowTime.getMinutes();
+
+      //Maby I first have to change it in seconds, to do math with it?
+
+      const nowTimeInSeconds = (minute * 60) + (hour * 60 * 60) + (day * 60 * 60 *24) + (month * 60 * 60 * 24 * 30) + (year * 60 * 60 * 24 * 30 * 12);
+
+      console.log(nowTimeInSeconds);
+
+      // const timeDiff = seconds minus seconds
+      // console.log(timeDiff); 
+    };
+
+
+    function saveUserInputs() {
+      const birthDateInput = document.querySelector('.birth-date-js');
+      const birthTimeInput = document.querySelector('.birth-time-js');
+
+      userBirthDate = birthDateInput.value;
+      userBirthTime = birthTimeInput.value;
+
+      //Maby I first have to change it in seconds, to do math with it?
+      
+    };
+
+
+
+
+  </script>
+</body>
+</html>
