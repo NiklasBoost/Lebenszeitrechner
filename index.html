@@ -27,8 +27,8 @@
   
   <script>
     // first lets save the input in to variables
-    let userBirthDate;
-    let userBirthTime;
+    // let userBirthDate; // i think, i don't need this 
+    // let userBirthTime;
     
     document.querySelector('.see-past-time-button-js')
     .addEventListener('click', () => {
@@ -52,7 +52,7 @@
       const timeDiffInSeconds = nowTimeInSeconds - func;
       return timeDiffInSeconds;
     };
-    
+
     function saveUserInputs() {
       const birthDateInput = document.querySelector('.birth-date-js');
       const birthTimeInput = document.querySelector('.birth-time-js');
