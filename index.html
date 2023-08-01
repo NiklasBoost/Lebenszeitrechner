@@ -14,66 +14,88 @@
   <p>ps. this is just for javascript practice. So please don't be offended by the lack of CSS in this project.</p>
 
   <div>
-    <div>Your past time in milliseconds</div>
-    <div>Your past time in seconds</div>
-    <div>Your past time in minutes</div>
-    <div>Your past time in hours</div>
-    <div>Your past time in days</div>
-    <div>Your past time in weeks</div>
-    <div>Your past time in month</div>
-    <div>Your past time in years</div>
-    <div>Your past time in decades</div>
+    <div class="milliseconds-div"></div>
+    <div class="seconds-div"></div>
+    <div class="minutes-div"></div>
+    <div class="hours-div"></div>
+    <div class="days-div"></div>
+    <div class="weeks-div"></div>
+    <div class="month-div"></div>
+    <div class="years-div"></div>
+    <div class="decades-div"></div>
   </div>
-
+  
   <script>
     // first lets save the input in to variables
     let userBirthDate;
     let userBirthTime;
     let userBirth;
     
-
+    
     document.querySelector('.see-past-time-button-js')
-      .addEventListener('click', () => {
+    .addEventListener('click', () => {
         saveUserInputs();
-        // if () {
-        //   console.log('OMG! YOU WERE BORNED IN THE FUTURE!');
-        // }
-        diffToNowTime();
+        setInterval(() => { // I don't know why, but the interval doesn't run
+          putOutOnPastTimeDivs(diffToNowTime(saveUserInputs()));
+        }, 500);
       });
-
-
-    function diffToNowTime() {
-      const nowTime = new Date();
+      
+      
+    function diffToNowTime(func) {
+      let nowTime = new Date();
       const year = nowTime.getFullYear();
       const month = nowTime.getMonth() + 1;
       const day = nowTime.getDate();
       const hour = nowTime.getHours();
       const minute = nowTime.getMinutes();
-
-      //Maby I first have to change it in seconds, to do math with it?
-
+      
       const nowTimeInSeconds = (minute * 60) + (hour * 60 * 60) + (day * 60 * 60 *24) + (month * 60 * 60 * 24 * 30) + (year * 60 * 60 * 24 * 30 * 12);
-
-      console.log(nowTimeInSeconds);
-
-      // const timeDiff = seconds minus seconds
-      // console.log(timeDiff); 
+            
+      const timeDiffInSeconds = nowTimeInSeconds - func;
+      return timeDiffInSeconds;
     };
-
-
     function saveUserInputs() {
       const birthDateInput = document.querySelector('.birth-date-js');
       const birthTimeInput = document.querySelector('.birth-time-js');
-
-      userBirthDate = birthDateInput.value;
-      userBirthTime = birthTimeInput.value;
-
-      //Maby I first have to change it in seconds, to do math with it?
       
+      userBirthDate = new Date(birthDateInput.value);
+      userBirthTime = birthTimeInput.value;
+      const [inputHour, inputMinute] = userBirthTime.split(":");
+      
+      const year = userBirthDate.getFullYear();
+      const month = userBirthDate.getMonth() + 1;
+      const day = userBirthDate.getDate();
+      const hour = Number(inputHour);
+      const minute = Number(inputMinute);
+
+      const birthTimeInSeconds = (minute * 60) + (hour * 60 * 60) + (day * 60 * 60 * 24) + (month * 60 * 60 * 24 * 30) + (year * 60 * 60 * 24 * 30 * 12);
+      
+      return birthTimeInSeconds;
     };
+    function putOutOnPastTimeDivs(func) {
+      const milliseconds = document.querySelector('.milliseconds-div');
+      const seconds = document.querySelector('.seconds-div');
+      const minutes = document.querySelector('.minutes-div');
+      const hours = document.querySelector('.hours-div');
+      const days = document.querySelector('.days-div');
+      const weeks = document.querySelector('.weeks-div');
+      const month = document.querySelector('.month-div');
+      const years = document.querySelector('.years-div');
+      const decades = document.querySelector('.decades-div');
+
+      milliseconds.innerHTML = func * 1000 + ' milliseconds';
+      seconds.innerHTML = func + 'seconds';
+      minutes.innerHTML = Math.round(func / 60) + ' minutes';
+      hours.innerHTML = Math.round(func / 60 / 60) + ' hours';
+      days.innerHTML = Math.round(func / 60 / 60 / 24) + ' days';
+      weeks.innerHTML = Math.round(func / 60 / 60 / 24 / 7) + ' weeks';
+      month.innerHTML = Math.round(func / 60 / 60 / 24 / 7 / 30) + ' month';
+      years.innerHTML = Math.round(func / 60 / 60 / 24 / 365) + ' years';
+      decades.innerHTML = Math.round(func / 60 / 60 /24 /365 / 10) + ' decades';
 
 
-
+    }
+    
 
   </script>
 </body>
