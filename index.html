@@ -71,7 +71,7 @@
       
       return birthTimeInSeconds;
     };
-    
+
     function putOutOnPastTimeDivs(func) {
       const milliseconds = document.querySelector('.milliseconds-div');
       const seconds = document.querySelector('.seconds-div');
@@ -83,6 +83,7 @@
       const years = document.querySelector('.years-div');
       const decades = document.querySelector('.decades-div');
 
+      // check the math again; here are mistakes
       milliseconds.innerHTML = func * 1000 + ' milliseconds';
       seconds.innerHTML = func + 'seconds';
       minutes.innerHTML = Math.round(func / 60) + ' minutes';
