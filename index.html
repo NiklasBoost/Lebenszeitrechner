@@ -32,6 +32,8 @@
     .addEventListener('click', () => {
       saveUserInputs();
       setInterval(() => { // I don't know why, but the interval doesn't run
+        saveUserInputs();
+        diffToNowTime();
         putOutOnPastTimeDivs(diffToNowTime(saveUserInputs()));
       }, 1000);
     });
@@ -44,15 +46,10 @@
       const day = nowTime.getDate();
       const hour = nowTime.getHours();
       const minute = nowTime.getMinutes();
+      const seconds = nowTime.getSeconds();
 
-      // This is updating
-      console.log(nowTime);
-      
-      // The bug has to be here
-      const nowTimeInSeconds = (minute * 60) + (hour * 60 * 60) + (day * 60 * 60 *24) + (month * 60 * 60 * 24 * 30) + (year * 60 * 60 * 24 * 30 * 12);
+      const nowTimeInSeconds = seconds + (minute * 60) + (hour * 60 * 60) + (day * 60 * 60 *24) + (month * 60 * 60 * 24 * 30) + (year * 60 * 60 * 24 * 30 * 12);
 
-      // this not
-      console.log(nowTimeInSeconds)
             
       const timeDiffInSeconds = nowTimeInSeconds - func;
 
@@ -81,7 +78,6 @@
     };
 
     function putOutOnPastTimeDivs(func) {
-      const milliseconds = document.querySelector('.milliseconds-div');
       const seconds = document.querySelector('.seconds-div');
       const minutes = document.querySelector('.minutes-div');
       const hours = document.querySelector('.hours-div');
@@ -93,8 +89,8 @@
 
       console.log('interval is running');
 
-      milliseconds.innerHTML = func * 1000 + ' milliseconds';
-      seconds.innerHTML = func + 'seconds';
+      
+      seconds.innerHTML = func + ' seconds';
       minutes.innerHTML = Math.round(func / 60) + ' minutes';
       hours.innerHTML = Math.round(func / 60 / 60) + ' hours';
       days.innerHTML = Math.round(func / 60 / 60 / 24) + ' days';
