@@ -9,7 +9,9 @@
   <h2>Welcome to see your lifetime!</h2>
   <label>You only have to enter your date of birth and time:</label>
     <input type="date" class="birth-date-js">
-    <input type="time" class="birth-time-js">
+    <input type="time" class="birth-time-js" onkeyup="
+      startPastLifeFunc();
+    ">
     <button class="see-past-time-button-js">see past lifetime</button>
   <p>ps. this is just for javascript practice. So please don't be offended by the lack of CSS in this project.</p>
 
@@ -30,12 +32,7 @@
 
     document.querySelector('.see-past-time-button-js')
     .addEventListener('click', () => {
-      saveUserInputs();
-      setInterval(() => { // I don't know why, but the interval doesn't run
-        saveUserInputs();
-        diffToNowTime();
-        putOutOnPastTimeDivs(diffToNowTime(saveUserInputs()));
-      }, 1000);
+      startPastLifeFunc(true);
     });
     
     
@@ -100,7 +97,17 @@
       decades.innerHTML = Math.round(func / 60 / 60 /24 /365 / 10) + ' decades';
     }
     
-
+    function startPastLifeFunc(boolean) {
+      // console.log(event.key);
+      if(event.key === 'Enter' || boolean) {
+        saveUserInputs();
+        setInterval(() => { // I don't know why, but the interval doesn't run
+          saveUserInputs();
+          diffToNowTime();
+          putOutOnPastTimeDivs(diffToNowTime(saveUserInputs()));
+        }, 1000);
+      }
+    }
   </script>
 </body>
 </html>
