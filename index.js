@@ -50,6 +50,7 @@ const unbornSayings = [
   "Ihr Geburtsdatum ist so weit in der Zukunft, dass selbst die Zeit selbst darauf gewartet hat.",
   "Ihr Geburtsdatum ist wie ein ungelöstes Rätsel aus der Zukunft, das noch erforscht werden muss.",
 ];
+let unbornSayingsIndex = 0;
 
 let pastTime = {
   nowTime: 0,
@@ -66,12 +67,8 @@ let pastTime = {
    
     const timeDiffInSeconds = nowTimeInSeconds - func;
 
-    if (timeDiffInSeconds < 0) {
-      console.log(unbornSayings[2]);
-    }
     return timeDiffInSeconds;
     
-
   },
   displayPastTime: (func) => {
     const timeDiff = pastTime.diffToNowTime(saveUserInputs());
@@ -79,7 +76,14 @@ let pastTime = {
     
     if (timeDiff < 0) {
       console.log('DocAusgabe');
-      displayMessage('.message', unbornSayings[0]);
+      displayMessage('.message', unbornSayings[unbornSayingsIndex]);
+
+      if(unbornSayingsIndex < unbornSayingsIndex.length) {
+        unbornSayingsIndex++;
+      } else {
+        unbornSayingsIndex = 0;
+      }
+      
       return;
     } else {
       const seconds = document.querySelector('.seconds-div');
