@@ -1,8 +1,0 @@
-Wenn jemand beim Lebenszeitrechner etwas eingibt, was noch nicht passiert ist, muss sowas kommen wie: Bro, du bist noch nicht mal am Leben! --> Vielleicht sogar Sprüche, die sich durchwechseln
-
-Wenn Datumseingabe > aktuelles Datums
-  Consolenausgabe mit lustigen Sprüchen
-else 
-  den Code ganz normal fortsetzten lassen
-
-Siehe 1. September in Logseq
