@@ -51,6 +51,7 @@ const unbornSayings = [
   "Ihr Geburtsdatum ist wie ein ungelöstes Rätsel aus der Zukunft, das noch erforscht werden muss.",
 ];
 let unbornSayingsIndex = 0;
+let runningTimeInterval = null;
 
 let pastTime = {
   nowTime: 0,
@@ -75,16 +76,20 @@ let pastTime = {
     console.log(timeDiff);
     
     if (timeDiff < 0) {
-      console.log('DocAusgabe');
       displayMessage('.message', unbornSayings[unbornSayingsIndex]);
+      clearInterval(runningTimeInterval);
 
-      if(unbornSayingsIndex < unbornSayingsIndex.length) {
+      if(unbornSayingsIndex < unbornSayings.length) {
         unbornSayingsIndex++;
+        console.log('if ' + unbornSayingsIndex);
       } else {
         unbornSayingsIndex = 0;
+        console.log('else ' + unbornSayingsIndex);
+        console.log(unbornSayings.length);
       }
-      
+      // console.log(unbornSayingsIndex);
       return;
+
     } else {
       const seconds = document.querySelector('.seconds-div');
       const minutes = document.querySelector('.minutes-div');
@@ -116,7 +121,7 @@ document.querySelector('.see-past-time-button-js')
 
 function startPastLifeFunc(boolean) {
   if(event.key === 'Enter' || boolean) {
-    setInterval(() => { 
+    runningTimeInterval = setInterval(() => { 
       pastTime.displayPastTime(pastTime.diffToNowTime(saveUserInputs()));
     }, 1000);
   }
